@@ -35,8 +35,9 @@ updateClient = (req, res) => {
 // this is our delete method
 // this method removes existing data in our database
 deleteClient = (req, res) => {
-    const { dni } = req.body;
-    Client.findByIdAndRemove(dni, (err) => {
+    const { filter } = req.body;
+    console.log(filter);
+    Client.findOneAndRemove(filter, (err) => {
         if (err) return res.send(err);
         return res.json({ success: true });
     });
@@ -74,7 +75,7 @@ putClient = (req, res) => {
 };
 
 // this is our create method
-// this method adds new data in our database
+// this method adds new payment in our database
 putPayment = (req, res) => {
     let payment = new Payment();
 
@@ -104,12 +105,24 @@ putPayment = (req, res) => {
     });
 };
 
+// this is our getClient method
+// this method fetches all available payments for a user in our database
+getClientPayments = (req, res) => {
+
+    const { dni } = req.params;
+    Payment.find({ dni : dni }, 'dni mes monto',(err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true, clientPayments: data });
+    });
+};
+
 module.exports = {
     getClients,
     getClient,
     updateClient,
     deleteClient,
     putClient,
-    putPayment
+    putPayment,
+    getClientPayments
     
 }

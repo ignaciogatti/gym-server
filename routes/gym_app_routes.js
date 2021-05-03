@@ -10,5 +10,6 @@ router.post('/updateClient', gym_app_controller.updateClient);
 router.delete('/deleteClient', gym_app_controller.deleteClient);
 router.post('/putClient', gym_app_controller.putClient);
 router.post('/putPayment', gym_app_controller.putPayment);
+router.get('/getClientPayments/:dni', gym_app_controller.getClientPayments);
 
 module.exports = router
