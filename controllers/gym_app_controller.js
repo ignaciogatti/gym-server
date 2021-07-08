@@ -26,6 +26,7 @@ getClient = (req, res) => {
 // this method overwrites existing data in our database
 updateClient = (req, res) => {
     const { filter, update } = req.body;
+    console.log(filter);
     Client.findOneAndUpdate(filter, update, (err) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true });
@@ -48,9 +49,9 @@ deleteClient = (req, res) => {
 putClient = (req, res) => {
     let client = new Client();
 
-    const { nombre, apellido, dni } = req.body;
+    const { nombre, apellido, fechaNacimiento, dni, telefono, fechaPagoTemprana } = req.body;
 
-    if (!nombre || !apellido || !dni) {
+    if (!nombre || !apellido ||!fechaNacimiento || !dni || !telefono || !fechaPagoTemprana) {
         return res.json({
         success: false,
         error: 'INVALID INPUTS',
@@ -59,7 +60,10 @@ putClient = (req, res) => {
 
     client.nombre = nombre;
     client.apellido = apellido;
+    client.fechaNacimiento = fechaNacimiento;
     client.dni = dni;
+    client.telefono = telefono;
+    client.fechaPagoTemprana = fechaPagoTemprana;
     
     client.save((err) => {
         if (err) return res.json({ success: false, error: err });
@@ -68,7 +72,10 @@ putClient = (req, res) => {
         client: {
             nombre: client.nombre,
             apellido: client.apellido,
-            dni: client.dni
+            fechaNacimiento: client.fechaNacimiento,
+            dni: client.dni,
+            telefono: client.telefono,
+            fechaPagoTemprana: client.fechaPagoTemprana
         } 
         });
     });
@@ -79,9 +86,9 @@ putClient = (req, res) => {
 putPayment = (req, res) => {
     let payment = new Payment();
 
-    const { dni, mes, monto } = req.body;
+    const { dni, mes, formaPago, monto } = req.body;
 
-    if ( !dni || !mes || !monto) {
+    if ( !dni || !mes || !formaPago || !monto) {
         return res.json({
         success: false,
         error: 'INVALID INPUTS',
@@ -90,6 +97,7 @@ putPayment = (req, res) => {
 
     payment.dni = dni;
     payment.mes = mes;
+    payment.formaPago = formaPago;
     payment.monto = monto;
     
     payment.save((err) => {
@@ -99,6 +107,7 @@ putPayment = (req, res) => {
         payment: {
             dni: payment.dni,
             mes: payment.mes,
+            formaPago: payment.formaPago,
             monto: payment.monto
         } 
         });

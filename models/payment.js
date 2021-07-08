@@ -6,6 +6,7 @@ const DataSchema = new Schema(
   {
     dni: String,
     mes: String,
+    formaPago: String,
     monto: Number
   },
   { timestamps: true }

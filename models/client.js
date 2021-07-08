@@ -6,7 +6,10 @@ const DataSchema = new Schema(
   {
     nombre: String,
     apellido: String,
+    fechaNacimiento: Date,
     dni: String,
+    telefono: String,
+    fechaPagoTemprana: Number
   },
   { timestamps: true }
 );
