@@ -1,3 +1,6 @@
 mongoConnection.json
 
 node_modules/*
+
+.gcloudignore
+app.yaml
