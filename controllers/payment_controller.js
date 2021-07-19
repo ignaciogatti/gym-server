@@ -5,9 +5,9 @@ const Payment = require('../models/payment');
 putPayment = (req, res) => {
     let payment = new Payment();
 
-    const { dni, mes, formaPago, monto } = req.body;
+    const { dni, mes, formaPago, monto} = req.body;
 
-    if ( !dni || !mes || !formaPago || !monto) {
+    if ( !dni || !mes || !formaPago || !monto ) {
         return res.json({
         success: false,
         error: 'INVALID INPUTS',
@@ -44,9 +44,18 @@ getClientPayments = (req, res) => {
     });
 };
 
+// this is our get method
+// this method fetches all available payments in our database
+getPayments = (req, res) => {
+    Payment.find((err, data) => {
+      if (err) return res.json({ success: false, error: err });
+      return res.json({ success: true, payments: data });
+    });
+  };
 
 module.exports = {
     putPayment,
-    getClientPayments
+    getClientPayments,
+    getPayments
     
 }

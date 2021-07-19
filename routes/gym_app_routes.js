@@ -13,6 +13,7 @@ router.delete('/deleteClient', gym_app_controller.deleteClient);
 router.post('/putClient', gym_app_controller.putClient);
 router.post('/putPayment', payment_controller.putPayment);
 router.get('/getClientPayments/:dni', payment_controller.getClientPayments);
+router.get('/getPayments', payment_controller.getPayments);
 router.get('/getPlans', plan_controller.getPlans);
 router.post('/updatePlan', plan_controller.updatePlan);
 router.delete('/deletePlan', plan_controller.deletePlan);
